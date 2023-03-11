@@ -1,0 +1,33 @@
+{
+  "name": "three-fxr",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Hajime-san/three-fxr.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Hajime-san/three-fxr/issues"
+  },
+  "homepage": "https://github.com/Hajime-san/three-fxr#readme",
+  "devDependencies": {
+    "@types/three": "^0.149.0",
+    "typescript": "5.0.1-rc",
+    "vite": "4.1.4"
+  },
+  "dependencies": {
+    "three": "0.150.1"
+  },
+  "engines": {
+    "node": ">=18.15.0"
+  },
+  "volta": {
+    "node": "18.15.0"
+  }
+}
