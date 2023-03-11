@@ -22,6 +22,7 @@
     "vite": "4.1.4"
   },
   "dependencies": {
+    "comparison-slider": "1.2.0",
     "three": "0.150.1"
   },
   "engines": {
