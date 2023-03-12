@@ -107,12 +107,17 @@ window.addEventListener("load", () => {
 
   // initialize gui
   const gui = new GUI();
-  const params = { sharpness: DEFAULT_SHARPNESS };
+  const params = { sharpness: DEFAULT_SHARPNESS, comparison: true };
   gui.add(params, "sharpness", 0, 2).onChange((value: number) => {
     rcasMaterial.uniforms["sharpness"].value = value;
   });
   // initialize comparison slider
   const comparisonSlider = new ComparisonSlider("#container");
+  gui.add(params, "comparison").onChange((value: boolean) => {
+    value
+      ? comparisonSlider.$handle.removeAttribute("hidden")
+      : comparisonSlider.$handle.setAttribute("hidden", "true");
+  });
 
   // check dom resize
   const resizeObserver = new ResizeObserver((entries) => {
