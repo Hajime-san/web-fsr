@@ -1,17 +1,21 @@
 import * as THREE from "three";
-import vertexShader from "./vert.glsl?raw";
-import fragmentShader from "./easu.glsl?raw";
-import rcasFragmentShader from "./rcas.glsl?raw";
+import GUI from "lil-gui";
 import ComparisonSlider from "comparison-slider";
+// shaders
+import vertexShader from "./vert.glsl?raw";
+import easuFragmentShader from "./easu.glsl?raw";
+import rcasFragmentShader from "./rcas.glsl?raw";
 
 window.addEventListener("load", () => {
+  const DEFAULT_SHARPNESS = 0.25;
+  // dom size variables
   let width = 0;
   let height = 0;
   let aspect = 0;
+  // dom
   const container = document.getElementById("container");
-  const sharpness = document.getElementById("sharpness") as HTMLInputElement;
-
   const video = document.getElementById("video") as HTMLVideoElement;
+  // calculate initial size
   aspect = video.videoWidth / video.videoHeight;
   width = window.innerWidth > video.videoWidth
     ? video.videoWidth
@@ -19,7 +23,7 @@ window.addEventListener("load", () => {
   height = window.innerHeight > video.videoHeight
     ? video.videoHeight
     : window.innerHeight;
-
+  // camera
   const camera = new THREE.OrthographicCamera(
     width / -2,
     width / 2,
@@ -30,13 +34,13 @@ window.addEventListener("load", () => {
   );
   camera.position.z = 1;
 
-  const scene = new THREE.Scene();
-  scene.add(camera);
-
+  // common object
   const videoTexture = new THREE.VideoTexture(video);
-
   const geometry = new THREE.PlaneGeometry(2, 2);
-  const material = new THREE.ShaderMaterial({
+
+  // EASU stage setting
+  const easuScene = new THREE.Scene();
+  const easuMaterial = new THREE.ShaderMaterial({
     uniforms: {
       iChannel0: {
         value: videoTexture,
@@ -46,13 +50,13 @@ window.addEventListener("load", () => {
       },
     },
     vertexShader,
-    fragmentShader,
+    fragmentShader: easuFragmentShader,
     glslVersion: THREE.GLSL3,
   });
-
-  const mesh = new THREE.Mesh(geometry, material);
-  scene.add(mesh);
-
+  const easuMesh = new THREE.Mesh(geometry, easuMaterial);
+  easuScene.add(easuMesh);
+  easuScene.add(camera);
+  // create renderer
   const renderer = new THREE.WebGLRenderer({ antialias: true });
   renderer.setSize(width, height);
   renderer.setAnimationLoop(animation);
@@ -62,13 +66,13 @@ window.addEventListener("load", () => {
     "ComparisonSlider__After",
   );
 
+  // RCAS stage setting
   const renderTarget = new THREE.WebGLRenderTarget(width, height, {
     depthBuffer: false,
     stencilBuffer: false,
   });
-  const postScene = new THREE.Scene();
-  const postGeometry = new THREE.PlaneGeometry(2, 2);
-  const postMaterial = new THREE.ShaderMaterial({
+  const rcasScene = new THREE.Scene();
+  const rcasMaterial = new THREE.ShaderMaterial({
     vertexShader,
     fragmentShader: rcasFragmentShader,
     uniforms: {
@@ -81,31 +85,40 @@ window.addEventListener("load", () => {
       iResolution: {
         value: new THREE.Vector2(width, height),
       },
-      sharpness: { value: Number(sharpness.value) },
+      sharpness: { value: DEFAULT_SHARPNESS },
     },
     glslVersion: THREE.GLSL3,
   });
-  const postMesh = new THREE.Mesh(postGeometry, postMaterial);
-  postScene.add(postMesh);
+  const rcasMesh = new THREE.Mesh(geometry.clone(), rcasMaterial);
+  rcasScene.add(rcasMesh);
 
-  // animation
-
+  // tick
   function animation() {
-    material.uniforms["iChannel0"].value = videoTexture;
-    postMaterial.uniforms["iChannel0"].value = videoTexture;
+    easuMaterial.uniforms["iChannel0"].value = videoTexture;
+    rcasMaterial.uniforms["iChannel0"].value = videoTexture;
 
+    // render EASU stage
     renderer.setRenderTarget(renderTarget);
-    renderer.render(scene, camera);
-
+    renderer.render(easuScene, camera);
+    // render RCAS stage
     renderer.setRenderTarget(null);
-    renderer.render(postScene, camera);
+    renderer.render(rcasScene, camera);
   }
 
+  // initialize gui
+  const gui = new GUI();
+  const params = { sharpness: DEFAULT_SHARPNESS };
+  gui.add(params, "sharpness", 0, 2).onChange((value: number) => {
+    rcasMaterial.uniforms["sharpness"].value = value;
+  });
+  // initialize comparison slider
   const comparisonSlider = new ComparisonSlider("#container");
 
+  // check dom resize
   const resizeObserver = new ResizeObserver((entries) => {
     for (const entry of entries) {
       if (entry.contentBoxSize) {
+        // recalculate size
         width = window.innerWidth > video.videoWidth
           ? video.videoWidth
           : window.innerWidth;
@@ -113,15 +126,17 @@ window.addEventListener("load", () => {
 
         renderer.setSize(width, height);
 
-        material.uniforms["iResolution"].value = new THREE.Vector2(
+        // update uniforms
+        easuMaterial.uniforms["iResolution"].value = new THREE.Vector2(
           width,
           height,
         );
-        postMaterial.uniforms["iResolution"].value = new THREE.Vector2(
+        rcasMaterial.uniforms["iResolution"].value = new THREE.Vector2(
           width,
           height,
         );
 
+        // update dom size
         container.setAttribute(
           "style",
           `

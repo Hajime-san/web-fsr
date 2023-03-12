@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "comparison-slider": "1.2.0",
+    "lil-gui": "0.18.0",
     "three": "0.150.1"
   },
   "engines": {
