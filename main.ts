@@ -14,6 +14,7 @@ window.addEventListener("load", () => {
   let aspect = 0;
   // dom
   const container = document.getElementById("container");
+  const canvas = document.getElementById("canvas") as HTMLCanvasElement;
   const video = document.getElementById("video") as HTMLVideoElement;
   // calculate initial size
   aspect = video.videoWidth / video.videoHeight;
@@ -57,11 +58,11 @@ window.addEventListener("load", () => {
   easuScene.add(easuMesh);
   easuScene.add(camera);
   // create renderer
-  const renderer = new THREE.WebGLRenderer({ antialias: true });
+  const renderer = new THREE.WebGLRenderer({ antialias: true, canvas });
   renderer.setSize(width, height);
   renderer.setAnimationLoop(animation);
-  container!.appendChild(renderer.domElement);
-  document.getElementsByTagName("canvas")[0].setAttribute(
+  container!.appendChild(canvas);
+  canvas.setAttribute(
     "class",
     "ComparisonSlider__After",
   );
