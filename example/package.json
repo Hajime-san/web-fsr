@@ -1,0 +1,9 @@
+{
+  "name": "example",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "author": "Hajime-san <utd.c.r.d.s.a@gmail.com>"
+}

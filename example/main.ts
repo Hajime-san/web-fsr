@@ -2,9 +2,9 @@ import * as THREE from "three";
 import GUI from "lil-gui";
 import ComparisonSlider from "comparison-slider";
 // shaders
-import vertexShader from "./vert.glsl?raw";
-import easuFragmentShader from "./easu.glsl?raw";
-import rcasFragmentShader from "./rcas.glsl?raw";
+import vertexShader from "../vert.glsl?raw";
+import easuFragmentShader from "../easu.glsl?raw";
+import rcasFragmentShader from "../rcas.glsl?raw";
 
 window.addEventListener("load", () => {
   const DEFAULT_SHARPNESS = 0.25;
