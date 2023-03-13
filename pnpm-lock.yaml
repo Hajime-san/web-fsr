@@ -1,22 +1,29 @@
-lockfileVersion: 5.3
+lockfileVersion: 5.4
 
-specifiers:
-  '@types/three': ^0.149.0
-  comparison-slider: 1.2.0
-  lil-gui: 0.18.0
-  three: 0.150.1
-  typescript: 5.0.1-rc
-  vite: 4.1.4
+importers:
 
-dependencies:
-  comparison-slider: 1.2.0
-  lil-gui: 0.18.0
-  three: 0.150.1
-
-devDependencies:
-  '@types/three': 0.149.0
-  typescript: 5.0.1-rc
-  vite: 4.1.4
+  .:
+    specifiers:
+      '@types/node': ^18.15.1
+      '@types/three': ^0.149.0
+      '@types/webextension-polyfill': 0.10.0
+      comparison-slider: 1.2.0
+      lil-gui: 0.18.0
+      three: 0.150.1
+      typescript: 5.0.1-rc
+      vite: 4.1.4
+      webextension-polyfill: 0.10.0
+    dependencies:
+      '@types/webextension-polyfill': 0.10.0
+      comparison-slider: 1.2.0
+      lil-gui: 0.18.0
+      three: 0.150.1
+      webextension-polyfill: 0.10.0
+    devDependencies:
+      '@types/node': 18.15.1
+      '@types/three': 0.149.0
+      typescript: 5.0.1-rc
+      vite: 4.1.4_@types+node@18.15.1
 
 packages:
 
@@ -218,11 +225,19 @@ packages:
     dev: true
     optional: true
 
+  /@types/node/18.15.1:
+    resolution: {integrity: sha512-U2TWca8AeHSmbpi314QBESRk7oPjSZjDsR+c+H4ECC1l+kFgpZf8Ydhv3SJpPy51VyZHHqxlb6mTTqYNNRVAIw==}
+    dev: true
+
   /@types/three/0.149.0:
     resolution: {integrity: sha512-fgNBm9LWc65ER/W0cvoXdC0iMy7Ke9e2CONmEr6Jt8sDSY3sw4DgOubZfmdZ747dkPhbQrgRQAWwDEr2S/7IEg==}
     dependencies:
       '@types/webxr': 0.5.1
     dev: true
+
+  /@types/webextension-polyfill/0.10.0:
+    resolution: {integrity: sha512-If4EcaHzYTqcbNMp/FdReVdRmLL/Te42ivnJII551bYjhX19bWem5m14FERCqdJA732OloGuxCRvLBvcMGsn4A==}
+    dev: false
 
   /@types/webxr/0.5.1:
     resolution: {integrity: sha512-xlFXPfgJR5vIuDefhaHuUM9uUgvPaXB6GKdXy2gdEh8gBWQZ2ul24AJz3foUd8NNKlSTQuWYJpCb1/pL81m1KQ==}
@@ -351,7 +366,7 @@ packages:
     hasBin: true
     dev: true
 
-  /vite/4.1.4:
+  /vite/4.1.4_@types+node@18.15.1:
     resolution: {integrity: sha512-3knk/HsbSTKEin43zHu7jTwYWv81f8kgAL99G5NWBcA1LKvtvcVAC4JjBH1arBunO9kQka+1oGbrMKOjk4ZrBg==}
     engines: {node: ^14.18.0 || >=16.0.0}
     hasBin: true
@@ -376,6 +391,7 @@ packages:
       terser:
         optional: true
     dependencies:
+      '@types/node': 18.15.1
       esbuild: 0.16.17
       postcss: 8.4.21
       resolve: 1.22.1
@@ -383,3 +399,7 @@ packages:
     optionalDependencies:
       fsevents: 2.3.2
     dev: true
+
+  /webextension-polyfill/0.10.0:
+    resolution: {integrity: sha512-c5s35LgVa5tFaHhrZDnr3FpQpjj1BB+RXhLTYUxGqBVN460HkbM8TBtEqdXWbpTKfzwCcjAZVF7zXCYSKtcp9g==}
+    dev: false

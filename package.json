@@ -8,14 +8,17 @@
   },
   "author": "Hajime-san <utd.c.r.d.s.a@gmail.com>",
   "devDependencies": {
+    "@types/node": "^18.15.1",
     "@types/three": "^0.149.0",
     "typescript": "5.0.1-rc",
     "vite": "4.1.4"
   },
   "dependencies": {
+    "@types/webextension-polyfill": "0.10.0",
     "comparison-slider": "1.2.0",
     "lil-gui": "0.18.0",
-    "three": "0.150.1"
+    "three": "0.150.1",
+    "webextension-polyfill": "0.10.0"
   },
   "engines": {
     "node": ">=18.15.0"
