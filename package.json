@@ -25,5 +25,10 @@
   },
   "volta": {
     "node": "18.15.0"
+  },
+  "pnpm": {
+    "patchedDependencies": {
+      "comparison-slider@1.2.0": "patches/comparison-slider@1.2.0.patch"
+    }
   }
 }

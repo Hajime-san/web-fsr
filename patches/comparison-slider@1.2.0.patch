@@ -1,0 +1,12 @@
+diff --git a/src/style.ts b/src/style.ts
+index 3a160ec90928105a7c97dbf92f8e02d58f1c24ba..9b9e59d290188586206958e434f69ee76a8b05dd 100644
+--- a/src/style.ts
++++ b/src/style.ts
+@@ -58,4 +58,6 @@ $style.innerHTML = /* css */`
+ 	margin-top: 22px;
+ }
+ `;
+-document.head.insertBefore( $style, document.head.firstChild );
++document.addEventListener('DOMContentLoaded', () => {
++	document.head.insertBefore( $style, document.head.firstChild );
++}, { once: true })
