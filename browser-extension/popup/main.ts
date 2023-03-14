@@ -1,7 +1,7 @@
 import browser from "webextension-polyfill";
 import * as THREE from "three";
 import GUI from "lil-gui";
-import ComparisonSlider from "comparison-slider";
+import ComparisonSlider from "comparison-slider/src/comparison-slider.ts";
 // shaders
 import vertexShader from "../../vert.glsl?raw";
 import easuFragmentShader from "../../easu.glsl?raw";
@@ -19,10 +19,6 @@ import rcasFragmentShader from "../../rcas.glsl?raw";
     const mainVideoPlayer = document.getElementById("MainVideoPlayer");
     const video = Array.from(document.getElementsByTagName("video")).find(
       (element) => element.src.startsWith("blob:"),
-    );
-    video.setAttribute(
-      "class",
-      "ComparisonSlider__before",
     );
 
     // dom size variables
@@ -144,7 +140,6 @@ import rcasFragmentShader from "../../rcas.glsl?raw";
     function animation() {
       easuMaterial.uniforms["iChannel0"].value = videoTexture;
       rcasMaterial.uniforms["iChannel0"].value = videoTexture;
-
       // render EASU stage
       renderer.setRenderTarget(renderTarget);
       renderer.render(easuScene, camera);
@@ -155,7 +150,7 @@ import rcasFragmentShader from "../../rcas.glsl?raw";
 
     // initialize gui
     const gui = new GUI({
-      container,
+      container: mainVideoPlayer,
     });
     const videoPlayer = document.getElementById("VideoPlayer");
     videoPlayer.setAttribute(
@@ -164,19 +159,27 @@ import rcasFragmentShader from "../../rcas.glsl?raw";
     );
     gui.domElement.setAttribute(
       "style",
-      "position: absolute; top: 10px; right: 10px;",
+      "position: absolute; z-index: 1; top: 10px; right: 10px;",
     );
-    const params = { sharpness: DEFAULT_SHARPNESS, comparison: true };
+    // gui params
+    const params = { sharpness: DEFAULT_SHARPNESS, FXR: true, comparison: true };
+    // sharpness
     gui.add(params, "sharpness", 0, 2).onChange((value: number) => {
       rcasMaterial.uniforms["sharpness"].value = value;
     });
+    // switch canvas
+    gui.add(params, "FXR").onChange((value: boolean) => {
+      value
+        ? canvas.removeAttribute("hidden")
+        : canvas.setAttribute("hidden", "true");
+    });
     // initialize comparison slider
-    // const comparisonSlider = new ComparisonSlider("#container");
-    // gui.add(params, "comparison").onChange((value: boolean) => {
-    //   value
-    //     ? comparisonSlider.$handle.removeAttribute("hidden")
-    //     : comparisonSlider.$handle.setAttribute("hidden", "true");
-    // });
+    const comparisonSlider = new ComparisonSlider(`#${mainVideoPlayer.id}`);
+    gui.add(params, "comparison").onChange((value: boolean) => {
+      value
+        ? comparisonSlider.$handle.removeAttribute("hidden")
+        : comparisonSlider.$handle.setAttribute("hidden", "true");
+    });
   }
 
   try {
