@@ -30,10 +30,7 @@ window.addEventListener("load", () => {
     width / 2,
     height / 2,
     height / -2,
-    1,
-    1000,
   );
-  camera.position.z = 1;
 
   // common object
   const videoTexture = new THREE.VideoTexture(video);
