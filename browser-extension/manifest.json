@@ -1,0 +1,24 @@
+{
+  "manifest_version": 3,
+  "name": "fxr-web",
+  "version": "1.0",
+  "description": "",
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "scripting"
+  ],
+  "action": {
+    "default_popup": "dist/index.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["dist/assets/index.js"],
+      "run_at": "document_start"
+    }
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ]
+}
