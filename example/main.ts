@@ -63,16 +63,15 @@ window.addEventListener("load", () => {
     "class",
     "ComparisonSlider__After",
   );
-
-  // RCAS stage setting
+  // offscreen render target
   const renderTarget = new THREE.WebGLRenderTarget(width, height, {
     depthBuffer: false,
     stencilBuffer: false,
   });
+
+  // RCAS stage setting
   const rcasScene = new THREE.Scene();
   const rcasMaterial = new THREE.ShaderMaterial({
-    vertexShader,
-    fragmentShader: rcasFragmentShader,
     uniforms: {
       iChannel0: {
         value: videoTexture,
@@ -85,6 +84,8 @@ window.addEventListener("load", () => {
       },
       sharpness: { value: DEFAULT_SHARPNESS },
     },
+    vertexShader,
+    fragmentShader: rcasFragmentShader,
     glslVersion: THREE.GLSL3,
   });
   const rcasMesh = new THREE.Mesh(geometry.clone(), rcasMaterial);
