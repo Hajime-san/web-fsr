@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "fxr-web",
+  "name": "Web FXR",
   "version": "1.0",
-  "description": "",
+  "description": "FidelityFX Super Resolution 1.0 for Web mediasource",
   "permissions": [
     "activeTab",
     "tabs",
@@ -13,12 +13,15 @@
   },
   "content_scripts": [
     {
-      "matches": ["<all_urls>"],
+      "matches": ["*://*.nicovideo.jp/*"],
       "js": ["dist/assets/index.js"],
       "run_at": "document_start"
     }
   ],
   "host_permissions": [
-    "<all_urls>"
-  ]
+    "*://*.nicovideo.jp/*"
+  ],
+  "icons": {
+    "128": "icon128.png"
+  }
 }

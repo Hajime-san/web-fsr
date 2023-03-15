@@ -4,7 +4,7 @@
   "private": true,
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Hajime-san/three-fxr.git"
+    "url": "git+https://github.com/Hajime-san/web-fxr.git"
   },
   "author": "Hajime-san <utd.c.r.d.s.a@gmail.com>",
   "devDependencies": {
