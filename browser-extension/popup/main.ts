@@ -10,7 +10,53 @@ import rcasFragmentShader from "../../rcas.glsl?raw";
 (async () => {
   if (typeof browser.tabs === "undefined") return;
 
-  async function insertElement() {
+  const [currentTab] = await browser.tabs.query({
+    active: true,
+    currentWindow: true,
+  });
+
+  // popup HUD handler
+  const hudHandler = document.getElementById("hudHandler") as HTMLInputElement;
+  hudHandler.addEventListener("click", async () => {
+    function injectHudHandler(checked: boolean) {
+      if (!document.getElementById("hiddenCSSStyle")) {
+        const $style = document.createElement("style");
+        $style.setAttribute("id", "hiddenCSSStyle");
+        $style.innerHTML = /* css */ `
+          [hidden] {display: none!important;}
+        `;
+        document.head.insertBefore($style, document.head.firstChild);
+      }
+
+      const guiElement = document.getElementsByClassName("lil-gui");
+      if (guiElement.length > 0) {
+        checked
+          ? guiElement[0].removeAttribute("hidden")
+          : guiElement[0].setAttribute("hidden", "true");
+      }
+
+      const comparisonSliderHandle = document.getElementsByClassName(
+        "ComparisonSlider__Handle",
+      );
+      if (comparisonSliderHandle.length > 0) {
+        checked
+          ? comparisonSliderHandle[0].removeAttribute("hidden")
+          : comparisonSliderHandle[0].setAttribute("hidden", "true");
+      }
+    }
+    try {
+      await browser.scripting.executeScript({
+        target: { tabId: currentTab.id },
+        func: injectHudHandler,
+        args: [hudHandler.checked],
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  });
+
+  // canvas content script
+  async function injectCanvasContent() {
     // page content dom
     const mainVideoPlayer = document.getElementById("MainVideoPlayer");
     const video = Array.from(document.getElementsByTagName("video")).find(
@@ -43,7 +89,7 @@ import rcasFragmentShader from "../../rcas.glsl?raw";
     console.log("window.devicePixelRatio", window.devicePixelRatio);
     // initialize dom
     const container = document.createElement("div");
-    const containerId = 'FXR_CANVAS';
+    const containerId = "FXR_CANVAS";
     container.setAttribute("id", containerId);
     container.setAttribute(
       "style",
@@ -146,7 +192,7 @@ import rcasFragmentShader from "../../rcas.glsl?raw";
 
     // initialize gui
     let gui: GUI;
-    if(document.getElementsByClassName('lil-gui').length === 0) {
+    if (document.getElementsByClassName("lil-gui").length === 0) {
       gui = new GUI({
         container: mainVideoPlayer,
       });
@@ -161,7 +207,11 @@ import rcasFragmentShader from "../../rcas.glsl?raw";
       "position: absolute; z-index: 1; top: 10px; right: 10px;",
     );
     // gui params
-    const params = { sharpness: DEFAULT_SHARPNESS, FXR: true, comparison: true };
+    const params = {
+      sharpness: DEFAULT_SHARPNESS,
+      FXR: true,
+      comparison: true,
+    };
     // sharpness
     gui.add(params, "sharpness", 0, 2).onChange((value: number) => {
       rcasMaterial.uniforms["sharpness"].value = value;
@@ -174,9 +224,11 @@ import rcasFragmentShader from "../../rcas.glsl?raw";
     });
     // initialize comparison slider
     let comparisonSlider: ComparisonSlider;
-    if(document.getElementsByClassName('ComparisonSlider__Handle').length === 0) {
+    if (
+      document.getElementsByClassName("ComparisonSlider__Handle").length === 0
+    ) {
       comparisonSlider = new ComparisonSlider(`#${mainVideoPlayer.id}`, {
-        handleOnlyControl: true
+        handleOnlyControl: true,
       });
     }
     gui.add(params, "comparison").onChange((value: boolean) => {
@@ -186,15 +238,10 @@ import rcasFragmentShader from "../../rcas.glsl?raw";
     });
   }
 
-  const [currentTab] = await browser.tabs.query({
-    active: true,
-    currentWindow: true,
-  });
-
   try {
     await browser.scripting.executeScript({
       target: { tabId: currentTab.id },
-      func: insertElement,
+      func: injectCanvasContent,
     });
   } catch (error) {
     console.log(error);
