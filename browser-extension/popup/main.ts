@@ -16,7 +16,8 @@ import rcasFragmentShader from "../../rcas.glsl?raw";
   });
 
   // popup HUD handler
-  const hudHandlerChecked = await browser.storage.local.get(["hudHandler"]);
+  const hudHandlerChecked: Record<"hudHandler", boolean> = await browser.storage
+    .local.get(["hudHandler"]);
   await browser.storage.local.set({ hudHandler: hudHandlerChecked });
   const hudHandler = document.getElementById("hudHandler") as HTMLInputElement;
   hudHandler.checked = hudHandlerChecked.hudHandler;
@@ -86,11 +87,11 @@ import rcasFragmentShader from "../../rcas.glsl?raw";
       width: iResolution.width * scale,
       height: iResolution.height * scale,
     };
-    console.log("iResolution", iResolution);
-    console.log("aspect", aspect);
-    console.log("scale", scale);
-    console.log("scaledIResolution", scaledIResolution);
-    console.log("window.devicePixelRatio", window.devicePixelRatio);
+    // console.log("iResolution", iResolution);
+    // console.log("aspect", aspect);
+    // console.log("scale", scale);
+    // console.log("scaledIResolution", scaledIResolution);
+    // console.log("window.devicePixelRatio", window.devicePixelRatio);
     // initialize dom
     const container = document.createElement("div");
     const containerId = "FXR_CANVAS";
@@ -212,10 +213,14 @@ import rcasFragmentShader from "../../rcas.glsl?raw";
     );
     // gui params
     const params = {
+      source: `${iResolution.width}px * ${iResolution.height}px`,
+      canvas: `${canvas.clientWidth}px * ${canvas.clientHeight}px`,
       sharpness: DEFAULT_SHARPNESS,
       FXR: true,
       comparison: true,
     };
+    gui.add(params, "source");
+    gui.add(params, "canvas");
     // sharpness
     gui.add(params, "sharpness", 0, 2).onChange((value: number) => {
       rcasMaterial.uniforms["sharpness"].value = value;
