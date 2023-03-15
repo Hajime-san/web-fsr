@@ -9,10 +9,6 @@ import rcasFragmentShader from "../../rcas.glsl?raw";
 
 (async () => {
   if (typeof browser.tabs === "undefined") return;
-  const [currentTab] = await browser.tabs.query({
-    active: true,
-    currentWindow: true,
-  });
 
   async function insertElement() {
     // page content dom
@@ -149,9 +145,12 @@ import rcasFragmentShader from "../../rcas.glsl?raw";
     }
 
     // initialize gui
-    const gui = new GUI({
-      container: mainVideoPlayer,
-    });
+    let gui: GUI;
+    if(document.getElementsByClassName('lil-gui').length === 0) {
+      gui = new GUI({
+        container: mainVideoPlayer,
+      });
+    }
     const videoPlayer = document.getElementById("VideoPlayer");
     videoPlayer.setAttribute(
       "style",
@@ -174,13 +173,23 @@ import rcasFragmentShader from "../../rcas.glsl?raw";
         : canvas.setAttribute("hidden", "true");
     });
     // initialize comparison slider
-    const comparisonSlider = new ComparisonSlider(`#${mainVideoPlayer.id}`);
+    let comparisonSlider: ComparisonSlider;
+    if(document.getElementsByClassName('ComparisonSlider__Handle').length === 0) {
+      comparisonSlider = new ComparisonSlider(`#${mainVideoPlayer.id}`, {
+        handleOnlyControl: true
+      });
+    }
     gui.add(params, "comparison").onChange((value: boolean) => {
       value
         ? comparisonSlider.$handle.removeAttribute("hidden")
         : comparisonSlider.$handle.setAttribute("hidden", "true");
     });
   }
+
+  const [currentTab] = await browser.tabs.query({
+    active: true,
+    currentWindow: true,
+  });
 
   try {
     await browser.scripting.executeScript({
