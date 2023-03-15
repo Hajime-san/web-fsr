@@ -119,37 +119,33 @@ window.addEventListener("load", () => {
   });
 
   // check dom resize
-  const resizeObserver = new ResizeObserver((entries) => {
-    for (const entry of entries) {
-      if (entry.contentBoxSize) {
-        // recalculate size
-        width = window.innerWidth > video.videoWidth
-          ? video.videoWidth
-          : window.innerWidth;
-        height = width / aspect;
+  const resizeObserver = new ResizeObserver(() => {
+    // recalculate size
+    width = window.innerWidth > video.videoWidth
+      ? video.videoWidth
+      : window.innerWidth;
+    height = width / aspect;
 
-        renderer.setSize(width, height);
+    renderer.setSize(width, height);
 
-        // update uniforms
-        easuMaterial.uniforms["iResolution"].value = new THREE.Vector2(
-          width,
-          height,
-        );
-        rcasMaterial.uniforms["iResolution"].value = new THREE.Vector2(
-          width,
-          height,
-        );
+    // update uniforms
+    easuMaterial.uniforms["iResolution"].value = new THREE.Vector2(
+      width,
+      height,
+    );
+    rcasMaterial.uniforms["iResolution"].value = new THREE.Vector2(
+      width,
+      height,
+    );
 
-        // update dom size
-        container.setAttribute(
-          "style",
-          `
-          width: ${width}px;
-          height: ${height}px;
-        `,
-        );
-      }
-    }
+    // update dom size
+    container.setAttribute(
+      "style",
+      `
+        width: ${width}px;
+        height: ${height}px;
+      `,
+    );
   });
   resizeObserver.observe(document.body);
 }, { once: true });

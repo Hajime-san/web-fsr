@@ -83,7 +83,7 @@ import rcasFragmentShader from "../../rcas.glsl?raw";
       height: video.videoHeight,
     };
     scale = height / iResolution.height;
-    const scaledIResolution = {
+    let scaledIResolution = {
       width: iResolution.width * scale,
       height: iResolution.height * scale,
     };
@@ -213,8 +213,12 @@ import rcasFragmentShader from "../../rcas.glsl?raw";
     );
     // gui params
     const params = {
-      source: `${iResolution.width}px * ${iResolution.height}px`,
-      canvas: `${canvas.clientWidth}px * ${canvas.clientHeight}px`,
+      source: `${iResolution.width.toFixed(1)}px * ${
+        iResolution.height.toFixed(1)
+      }px`,
+      canvas: `${canvas.clientWidth.toFixed(1)}px * ${
+        canvas.clientHeight.toFixed(1)
+      }px`,
       sharpness: DEFAULT_SHARPNESS,
       FXR: true,
       comparison: true,
@@ -245,6 +249,43 @@ import rcasFragmentShader from "../../rcas.glsl?raw";
         ? comparisonSlider.$handle.removeAttribute("hidden")
         : comparisonSlider.$handle.setAttribute("hidden", "true");
     });
+
+    // check dom resize
+    const resizeObserver = new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        const { contentRect } = entry;
+        // recalculate size
+        width = contentRect.width;
+        height = contentRect.height;
+        scale = height / iResolution.height;
+        scaledIResolution = {
+          width: iResolution.width * scale,
+          height: iResolution.height * scale,
+        };
+
+        renderer.setSize(scaledIResolution.width, scaledIResolution.height);
+        gui.controllers.forEach((controller) => {
+          if (controller.property === "canvas") {
+            controller.setValue(
+              `${scaledIResolution.width.toFixed(1)}px * ${
+                scaledIResolution.height.toFixed(1)
+              }px`,
+            );
+          }
+        });
+
+        // update uniforms
+        easuMaterial.uniforms["iResolution"].value = new THREE.Vector2(
+          scaledIResolution.width,
+          scaledIResolution.height,
+        );
+        rcasMaterial.uniforms["iResolution"].value = new THREE.Vector2(
+          scaledIResolution.width,
+          scaledIResolution.height,
+        );
+      }
+    });
+    resizeObserver.observe(mainVideoPlayer);
   }
 
   try {
