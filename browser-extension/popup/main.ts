@@ -16,8 +16,12 @@ import rcasFragmentShader from "../../rcas.glsl?raw";
   });
 
   // popup HUD handler
+  const hudHandlerChecked = await browser.storage.local.get(["hudHandler"]);
+  await browser.storage.local.set({ hudHandler: hudHandlerChecked });
   const hudHandler = document.getElementById("hudHandler") as HTMLInputElement;
+  hudHandler.checked = hudHandlerChecked.hudHandler;
   hudHandler.addEventListener("click", async () => {
+    await browser.storage.local.set({ hudHandler: hudHandler.checked });
     function injectHudHandler(checked: boolean) {
       if (!document.getElementById("hiddenCSSStyle")) {
         const $style = document.createElement("style");
@@ -30,7 +34,7 @@ import rcasFragmentShader from "../../rcas.glsl?raw";
 
       const guiElement = document.getElementsByClassName("lil-gui");
       if (guiElement.length > 0) {
-        checked
+        !checked
           ? guiElement[0].removeAttribute("hidden")
           : guiElement[0].setAttribute("hidden", "true");
       }
@@ -39,7 +43,7 @@ import rcasFragmentShader from "../../rcas.glsl?raw";
         "ComparisonSlider__Handle",
       );
       if (comparisonSliderHandle.length > 0) {
-        checked
+        !checked
           ? comparisonSliderHandle[0].removeAttribute("hidden")
           : comparisonSliderHandle[0].setAttribute("hidden", "true");
       }
