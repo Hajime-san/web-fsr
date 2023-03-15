@@ -47,7 +47,7 @@ import rcasFragmentShader from "../../rcas.glsl?raw";
     console.log("window.devicePixelRatio", window.devicePixelRatio);
     // initialize dom
     const container = document.createElement("div");
-    const containerId = crypto.randomUUID();
+    const containerId = 'FXR_CANVAS';
     container.setAttribute("id", containerId);
     container.setAttribute(
       "style",
