@@ -11,24 +11,29 @@ importers:
     specifiers:
       '@types/node': ^18.15.1
       '@types/three': ^0.149.0
-      '@types/webextension-polyfill': 0.10.0
       comparison-slider: 1.2.0
       lil-gui: 0.18.0
       three: 0.150.1
       typescript: 5.0.1-rc
       vite: 4.1.4
-      webextension-polyfill: 0.10.0
     dependencies:
-      '@types/webextension-polyfill': 0.10.0
       comparison-slider: 1.2.0_z6gc6atqoh2twvds55ofds6ag4
       lil-gui: 0.18.0
       three: 0.150.1
-      webextension-polyfill: 0.10.0
     devDependencies:
       '@types/node': 18.15.1
       '@types/three': 0.149.0
       typescript: 5.0.1-rc
       vite: 4.1.4_@types+node@18.15.1
+
+  browser-extension:
+    specifiers:
+      '@types/webextension-polyfill': 0.10.0
+      webextension-polyfill: 0.10.0
+    dependencies:
+      webextension-polyfill: 0.10.0
+    devDependencies:
+      '@types/webextension-polyfill': 0.10.0
 
 packages:
 
@@ -242,7 +247,7 @@ packages:
 
   /@types/webextension-polyfill/0.10.0:
     resolution: {integrity: sha512-If4EcaHzYTqcbNMp/FdReVdRmLL/Te42ivnJII551bYjhX19bWem5m14FERCqdJA732OloGuxCRvLBvcMGsn4A==}
-    dev: false
+    dev: true
 
   /@types/webxr/0.5.1:
     resolution: {integrity: sha512-xlFXPfgJR5vIuDefhaHuUM9uUgvPaXB6GKdXy2gdEh8gBWQZ2ul24AJz3foUd8NNKlSTQuWYJpCb1/pL81m1KQ==}

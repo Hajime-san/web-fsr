@@ -14,11 +14,9 @@
     "vite": "4.1.4"
   },
   "dependencies": {
-    "@types/webextension-polyfill": "0.10.0",
     "comparison-slider": "1.2.0",
     "lil-gui": "0.18.0",
-    "three": "0.150.1",
-    "webextension-polyfill": "0.10.0"
+    "three": "0.150.1"
   },
   "engines": {
     "node": ">=18.15.0"

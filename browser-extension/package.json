@@ -7,5 +7,11 @@
     "build": "vite build",
     "build:watch": "vite build --watch"
   },
-  "author": "Hajime-san <utd.c.r.d.s.a@gmail.com>"
+  "author": "Hajime-san <utd.c.r.d.s.a@gmail.com>",
+  "dependencies": {
+    "webextension-polyfill": "0.10.0"
+  },
+  "devDependencies": {
+    "@types/webextension-polyfill": "0.10.0"
+  }
 }
