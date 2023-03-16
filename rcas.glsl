@@ -7,7 +7,7 @@ uniform vec2 iResolution;
 uniform float sharpness;
 uniform sampler2D iChannel0;
 uniform sampler2D iChannel1;
-out vec4 fragColor;
+out vec4 rcasFragColor;
 
 /*
 * FidelityFX Super Resolution scales up a low resolution
@@ -159,5 +159,5 @@ void main()
     // if (fragCoord.x/iResolution.x > division) col = col_orig;
     // if (abs(fragCoord.x/iResolution.x - division)<.005) col = vec3(0);
 
-    fragColor = vec4(col,1);
+    rcasFragColor = vec4(col,1);
 }
