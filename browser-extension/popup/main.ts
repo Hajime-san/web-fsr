@@ -98,10 +98,17 @@ import rcasFragmentShader from "../../rcas.glsl?raw";
       width: iResolution.width * scale,
       height: iResolution.height * scale,
     };
+    let containerSize = {
+      width: scaledIResolution.width > width ? width : scaledIResolution.width,
+      height: scaledIResolution.height > height
+        ? height
+        : scaledIResolution.height,
+    };
     // console.log("iResolution", iResolution);
     // console.log("aspect", aspect);
     // console.log("scale", scale);
     // console.log("scaledIResolution", scaledIResolution);
+    // console.log("containerSize", containerSize);
     // console.log("window.devicePixelRatio", window.devicePixelRatio);
     // initialize dom
     const container = document.createElement("div");
@@ -109,7 +116,7 @@ import rcasFragmentShader from "../../rcas.glsl?raw";
     container.setAttribute("id", containerId);
     container.setAttribute(
       "style",
-      `width:${scaledIResolution.width}px; height:${scaledIResolution.height}px; margin: 0 auto; position: relative; text-align: center;`,
+      `width:${containerSize.width}px; height:${containerSize.height}px; margin: 0 auto; position: relative; text-align: center;`,
     );
     container.setAttribute(
       "class",
@@ -280,9 +287,17 @@ import rcasFragmentShader from "../../rcas.glsl?raw";
           width: iResolution.width * scale,
           height: iResolution.height * scale,
         };
+        containerSize = {
+          width: scaledIResolution.width > width
+            ? width
+            : scaledIResolution.width,
+          height: scaledIResolution.height > height
+            ? height
+            : scaledIResolution.height,
+        };
         container.setAttribute(
           "style",
-          `width:${scaledIResolution.width}px; height:${scaledIResolution.height}px; margin: 0 auto; position: relative; text-align: center;`,
+          `width:${containerSize.width}px; height:${containerSize.height}px; margin: 0 auto; position: relative; text-align: center;`,
         );
 
         renderer.setSize(scaledIResolution.width, scaledIResolution.height);
