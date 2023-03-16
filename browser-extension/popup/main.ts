@@ -15,6 +15,24 @@ import rcasFragmentShader from "../../rcas.glsl?raw";
     currentWindow: true,
   });
 
+  // insert css
+  try {
+    await browser.scripting.insertCSS({
+      target: { tabId: currentTab.id },
+      css: /* css */ `
+        [hidden] {
+          display: none!important;
+        }
+        #canvas {
+          width: 100% !important;
+          height: 100% !important;
+        }
+      `,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+
   // popup HUD handler
   const hudHandlerChecked: Record<"hudHandler", boolean> = await browser.storage
     .local.get(["hudHandler"]);
@@ -24,15 +42,6 @@ import rcasFragmentShader from "../../rcas.glsl?raw";
   hudHandler.addEventListener("click", async () => {
     await browser.storage.local.set({ hudHandler: hudHandler.checked });
     function injectHudHandler(checked: boolean) {
-      if (!document.getElementById("hiddenCSSStyle")) {
-        const $style = document.createElement("style");
-        $style.setAttribute("id", "hiddenCSSStyle");
-        $style.innerHTML = /* css */ `
-          [hidden] {display: none!important;}
-        `;
-        document.head.insertBefore($style, document.head.firstChild);
-      }
-
       const guiElement = document.getElementsByClassName("lil-gui");
       if (guiElement.length > 0) {
         !checked
@@ -83,8 +92,8 @@ import rcasFragmentShader from "../../rcas.glsl?raw";
       height: video.videoHeight,
     };
     scale = height / iResolution.height > 1.0
-    ? height / iResolution.height
-    : 1.0;
+      ? height / iResolution.height
+      : 1.0;
     let scaledIResolution = {
       width: iResolution.width * scale,
       height: iResolution.height * scale,
@@ -265,8 +274,8 @@ import rcasFragmentShader from "../../rcas.glsl?raw";
         width = contentRect.width;
         height = contentRect.height;
         scale = height / iResolution.height > 1.0
-        ? height / iResolution.height
-        : 1.0;
+          ? height / iResolution.height
+          : 1.0;
         scaledIResolution = {
           width: iResolution.width * scale,
           height: iResolution.height * scale,
