@@ -140,7 +140,12 @@ import rcasFragmentShader from "../../rcas.glsl?raw";
     easuScene.add(easuMesh);
     easuScene.add(camera);
     // create renderer
-    const renderer = new THREE.WebGLRenderer({ antialias: true, canvas });
+    const renderer = new THREE.WebGLRenderer({
+      antialias: true,
+      canvas,
+      stencil: false,
+      depth: false,
+    });
     renderer.setSize(scaledIResolution.width, scaledIResolution.height);
     renderer.setAnimationLoop(animation);
     if (!document.getElementById(containerId)) {
