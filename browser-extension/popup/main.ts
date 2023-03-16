@@ -82,7 +82,9 @@ import rcasFragmentShader from "../../rcas.glsl?raw";
       width: video.videoWidth,
       height: video.videoHeight,
     };
-    scale = height / iResolution.height;
+    scale = height / iResolution.height > 1.0
+    ? height / iResolution.height
+    : 1.0;
     let scaledIResolution = {
       width: iResolution.width * scale,
       height: iResolution.height * scale,
@@ -98,7 +100,7 @@ import rcasFragmentShader from "../../rcas.glsl?raw";
     container.setAttribute("id", containerId);
     container.setAttribute(
       "style",
-      "width:100%; height:100%; margin: 0 auto; position: relative; text-align: center;",
+      `width:${scaledIResolution.width}px; height:${scaledIResolution.height}px; margin: 0 auto; position: relative; text-align: center;`,
     );
     container.setAttribute(
       "class",
@@ -221,8 +223,8 @@ import rcasFragmentShader from "../../rcas.glsl?raw";
       source: `${video.videoWidth.toFixed(1)}px * ${
         video.videoHeight.toFixed(1)
       }px`,
-      canvas: `${canvas.clientWidth.toFixed(1)}px * ${
-        canvas.clientHeight.toFixed(1)
+      canvas: `${scaledIResolution.width.toFixed(1)}px * ${
+        scaledIResolution.height.toFixed(1)
       }px`,
       sharpness: DEFAULT_SHARPNESS,
       FXR: true,
@@ -262,11 +264,17 @@ import rcasFragmentShader from "../../rcas.glsl?raw";
         // recalculate size
         width = contentRect.width;
         height = contentRect.height;
-        scale = height / iResolution.height;
+        scale = height / iResolution.height > 1.0
+        ? height / iResolution.height
+        : 1.0;
         scaledIResolution = {
           width: iResolution.width * scale,
           height: iResolution.height * scale,
         };
+        container.setAttribute(
+          "style",
+          `width:${scaledIResolution.width}px; height:${scaledIResolution.height}px; margin: 0 auto; position: relative; text-align: center;`,
+        );
 
         renderer.setSize(scaledIResolution.width, scaledIResolution.height);
         gui.controllers.forEach((controller) => {
