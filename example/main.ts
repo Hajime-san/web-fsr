@@ -111,12 +111,14 @@ window.addEventListener("load", () => {
     rcasMaterial.uniforms["sharpness"].value = value;
   });
   // initialize comparison slider
-  const comparisonSlider = new ComparisonSlider("#container");
-  gui.add(params, "comparison").onChange((value: boolean) => {
-    value
-      ? comparisonSlider.$handle.removeAttribute("hidden")
-      : comparisonSlider.$handle.setAttribute("hidden", "true");
-  });
+  setTimeout(() => {
+    const comparisonSlider = new ComparisonSlider("#container");
+    gui.add(params, "comparison").onChange((value: boolean) => {
+      value
+        ? comparisonSlider.$handle.removeAttribute("hidden")
+        : comparisonSlider.$handle.setAttribute("hidden", "true");
+    });
+  }, 10);
 
   // check dom resize
   const resizeObserver = new ResizeObserver(() => {
