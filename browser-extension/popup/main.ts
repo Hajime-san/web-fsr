@@ -213,8 +213,8 @@ import rcasFragmentShader from "../../rcas.glsl?raw";
     );
     // gui params
     const params = {
-      source: `${iResolution.width.toFixed(1)}px * ${
-        iResolution.height.toFixed(1)
+      source: `${video.videoWidth.toFixed(1)}px * ${
+        video.videoHeight.toFixed(1)
       }px`,
       canvas: `${canvas.clientWidth.toFixed(1)}px * ${
         canvas.clientHeight.toFixed(1)
