@@ -112,7 +112,7 @@ import rcasFragmentShader from "../../rcas.glsl?raw";
     // console.log("window.devicePixelRatio", window.devicePixelRatio);
     // initialize dom
     const container = document.createElement("div");
-    const containerId = "FXR_CANVAS";
+    const containerId = "FSR_CANVAS";
     container.setAttribute("id", containerId);
     container.setAttribute(
       "style",
@@ -243,7 +243,7 @@ import rcasFragmentShader from "../../rcas.glsl?raw";
         scaledIResolution.height.toFixed(1)
       }px`,
       sharpness: DEFAULT_SHARPNESS,
-      FXR: true,
+      FSR: true,
       comparison: true,
     };
     gui.add(params, "source");
@@ -253,7 +253,7 @@ import rcasFragmentShader from "../../rcas.glsl?raw";
       rcasMaterial.uniforms["sharpness"].value = value;
     });
     // switch canvas
-    gui.add(params, "FXR").onChange((value: boolean) => {
+    gui.add(params, "FSR").onChange((value: boolean) => {
       value
         ? canvas.removeAttribute("hidden")
         : canvas.setAttribute("hidden", "true");

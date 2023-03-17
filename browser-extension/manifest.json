@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "Web FXR",
+  "name": "Web FSR",
   "version": "1.0",
   "description": "FidelityFX Super Resolution 1.0 for Web mediasource",
   "permissions": [

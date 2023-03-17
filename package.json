@@ -1,10 +1,10 @@
 {
-  "name": "web-fxr",
+  "name": "web-fsr",
   "version": "1.0.0",
   "private": true,
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Hajime-san/web-fxr.git"
+    "url": "git+https://github.com/Hajime-san/web-fsr.git"
   },
   "author": "Hajime-san <utd.c.r.d.s.a@gmail.com>",
   "devDependencies": {
