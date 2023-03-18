@@ -14,7 +14,7 @@ importers:
       comparison-slider: 1.2.0
       lil-gui: 0.18.0
       three: 0.150.1
-      typescript: 5.0.1-rc
+      typescript: 5.0.2
       vite: 4.1.4
     dependencies:
       comparison-slider: 1.2.0_z6gc6atqoh2twvds55ofds6ag4
@@ -23,7 +23,7 @@ importers:
     devDependencies:
       '@types/node': 18.15.1
       '@types/three': 0.149.0
-      typescript: 5.0.1-rc
+      typescript: 5.0.2
       vite: 4.1.4_@types+node@18.15.1
 
   browser-extension:
@@ -371,9 +371,9 @@ packages:
     resolution: {integrity: sha512-5C1MqKUWaHYo13BX0Q64qcdwImgnnjSOFgBscOzAo8MYCzEtqfQqorEKMcajnA3FHy1yVlIe9AmaMQ0OQracNA==}
     dev: false
 
-  /typescript/5.0.1-rc:
-    resolution: {integrity: sha512-zh75jY8gPo/y7fpmlTVN2bb2MigoLx4hGk+Cla9pY6lgSTvzJrmQQrRt5S80VTsEt6biWPZJgLK2nm6f0Ya+mA==}
-    engines: {node: '>=4.2.0'}
+  /typescript/5.0.2:
+    resolution: {integrity: sha512-wVORMBGO/FAs/++blGNeAVdbNKtIh1rbBL2EyQ1+J9lClJ93KiiKe8PmFIVdXhHcyv44SL9oglmfeSsndo0jRw==}
+    engines: {node: '>=12.20'}
     hasBin: true
     dev: true
 
