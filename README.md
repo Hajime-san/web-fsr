@@ -1,16 +1,15 @@
 # web-fsr
 
 This repository is an example of implementation
-[FidelityFX Super Resolution 1.0 (FSR)](https://github.com/GPUOpen-Effects/FidelityFX-FSR)
+[FidelityFX Super Resolution 1.0 (FSR)](https://gpuopen.com/fidelityfx-superresolution/)
 that port to `WebGL`.\
 Thanks to original porting that its in [ShaderToy](https://www.shadertoy.com/).
 
 - [https://www.shadertoy.com/view/stXSWB](https://www.shadertoy.com/view/stXSWB)
 
-And I tried to use for upscaling the image of `<video>` element on HTML, thus I
-thought that the technique could make `static` video source and `streaming`
-clearer.\
-I wrote [static video](./example/) app and [browser extension](./browser-extension/) to test the result.\
+I thought that the technique could make `static` video source and `streaming`
+clearer, thus I tried to use for upscaling the image of `<video>` element on HTML.\
+So I wrote [static video](./example/) example and [browser extension](./browser-extension/) to test the result.\
 Here are some examples.
 
 ## static video
@@ -76,3 +75,7 @@ Here are some examples.
   `1546kb`
 - comparison
   ![so39952539-comparison.png](assets/so39952539-comparison.png?raw=true "so39952539-comparison")
+
+## my guess
+From these examples, I think that `FSR 1.0` works well when the buffer resource to be denoised, no extreme small resolution and containing high spatial frequencies.\
+And it appears jagged a little bit on outline of Anime characters as in the picture.
