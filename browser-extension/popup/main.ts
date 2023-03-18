@@ -34,11 +34,10 @@ import rcasFragmentShader from "../../rcas.glsl?raw";
   }
 
   // popup HUD handler
-  const hudHandlerChecked: Record<"hudHandler", boolean> = await browser.storage
+  const hudHandlerState: Record<"hudHandler", boolean> = await browser.storage
     .local.get(["hudHandler"]);
-  await browser.storage.local.set({ hudHandler: hudHandlerChecked });
   const hudHandler = document.getElementById("hudHandler") as HTMLInputElement;
-  hudHandler.checked = hudHandlerChecked.hudHandler;
+  hudHandler.checked = hudHandlerState.hudHandler;
   hudHandler.addEventListener("click", async () => {
     await browser.storage.local.set({ hudHandler: hudHandler.checked });
     function injectHudHandler(checked: boolean) {
