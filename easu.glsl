@@ -5,7 +5,7 @@
 
 uniform vec2 iResolution;
 uniform sampler2D iChannel0;
-out vec4 easuFragColor;
+out vec4 fragColor;
 
 /* EASU stage
 *
@@ -255,5 +255,5 @@ void main()
         con0, con1, con2, con3, rendersize, rendersize, iResolution
     );
     FsrEasuF(c, fragCoord.xy, con0, con1, con2, con3);
-    easuFragColor = vec4(c.xyz, 1);
+    fragColor = vec4(c.xyz, 1);
 }
