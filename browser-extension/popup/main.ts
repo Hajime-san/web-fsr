@@ -227,7 +227,7 @@ import rcasFragmentShader from "../../rcas.glsl?raw";
     const videoPlayer = document.getElementById("VideoPlayer");
     videoPlayer.setAttribute(
       "style",
-      "z-index:6; user-select: auto;",
+      "z-index:8; user-select: auto;",
     );
     gui.domElement.setAttribute(
       "style",
