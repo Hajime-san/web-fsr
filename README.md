@@ -43,3 +43,13 @@ clearer.
 - FSR ![sm41892494-fsr.png](assets/sm41892494-fsr.png?raw=true "sm41892494-fsr")
 - comparison
   ![sm41892494-comparison.png](assets/sm41892494-comparison.png?raw=true "sm41892494-comparison")
+
+### [ぼっち・ざ・ろっく！ #1「転がるぼっち」](https://www.nicovideo.jp/watch/so41178183)
+
+- original video
+  \
+  resolution `1920 * 1080`
+  ![so41178183-original.png](assets/so41178183-original.png?raw=true "so41178183-original")
+- FSR ![so41178183-fsr.png](assets/so41178183-fsr.png?raw=true "so41178183-fsr")
+- comparison
+  ![so41178183-comparison.png](assets/so41178183-comparison.png?raw=true "so41178183-comparison")
