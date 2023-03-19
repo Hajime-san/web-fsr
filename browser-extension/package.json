@@ -2,12 +2,12 @@
   "name": "browser-extension",
   "version": "1.0.0",
   "type": "module",
+  "author": "Hajime-san <utd.c.r.d.s.a@gmail.com>",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "build:watch": "vite build --watch"
   },
-  "author": "Hajime-san <utd.c.r.d.s.a@gmail.com>",
   "dependencies": {
     "webextension-polyfill": "0.10.0"
   },
