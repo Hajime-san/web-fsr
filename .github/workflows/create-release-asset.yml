@@ -1,6 +1,7 @@
 name: 'Create Release Asset'
 
 on:
+  workflow_dispatch:
   push:
     tags:
       - "web-fxr-browser-extension@*.*.*"
