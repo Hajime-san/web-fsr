@@ -1,8 +1,12 @@
 {
   "manifest_version": 3,
   "name": "Web FSR",
-  "version": "1.0",
+  "version": "1.0.0",
   "description": "FidelityFX Super Resolution 1.0 for Web mediasource",
+  "developer": {
+    "name": "Hajime-san",
+    "url": "https://github.com/Hajime-san/web-fsr"
+  },
   "permissions": [
     "activeTab",
     "tabs",
