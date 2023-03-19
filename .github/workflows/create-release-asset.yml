@@ -5,6 +5,9 @@ on:
     tags:
       - "web-fxr-browser-extension@*.*.*"
 
+permissions:
+  contents: write
+
 env:
   NODE_VERSION: '18.15.0'
 
