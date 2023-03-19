@@ -24,6 +24,9 @@ Here are some examples.
   `2443kb`
 - comparison
   ![IMG_0086-MOV-comparison.png](assets/IMG_0086-MOV-comparison.png?raw=true "IMG_0086-MOV-comparison")
+- demo
+  \
+  [https://hajime-san.github.io/web-fsr/](https://hajime-san.github.io/web-fsr/)
 
 ## streaming with browser extension
 
