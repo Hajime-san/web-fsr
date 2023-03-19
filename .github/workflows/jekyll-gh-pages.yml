@@ -46,7 +46,7 @@ jobs:
         run: pnpm install
       # build
       - name: Build extension
-        run: pnpm build
+        run: process.env.CI=true pnpm build
         working-directory: ./example
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
