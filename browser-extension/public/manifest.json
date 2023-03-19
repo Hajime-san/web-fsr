@@ -10,12 +10,12 @@
     "storage"
   ],
   "action": {
-    "default_popup": "dist/index.html"
+    "default_popup": "index.html"
   },
   "content_scripts": [
     {
       "matches": ["*://*.nicovideo.jp/*"],
-      "js": ["dist/assets/index.js"],
+      "js": ["assets/index.js"],
       "run_at": "document_start"
     }
   ],
