@@ -1,0 +1,41 @@
+name: 'Create Release Asset'
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+env:
+  NODE_VERSION: '18.15.0'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      # node
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 7
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'pnpm'
+      - name: Install dependencies
+        run: pnpm install
+      # build
+      - name: Build extension
+        run: pnpm build
+        working-directory: ./browser-extension
+      # archive
+      - name: Archive extension
+        run: zip -r -j web-fsr-browser-extension.zip dist
+        working-directory: ./browser-extension
+
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: ./browser-extension/web-fsr-browser-extension.zip
