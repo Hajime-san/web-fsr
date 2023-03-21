@@ -25,6 +25,52 @@
 		[hidden] {
 			display: none !important;
 		}
+		.examples {
+			padding-top: 100px;
+		}
+		.examples h2 {
+			padding-bottom: 30px;
+		}
+		.examples section + section {
+			padding-top: 100px;
+		}
+		.example {
+			position: relative;
+		}
+		.example::before {
+			z-index: 1;
+			position: absolute;
+			bottom: 0;
+			left: 25%;
+			content: 'Original';
+			font-size: 30px;
+			color: #ff0000;
+		}
+		.example::after {
+			z-index: 1;
+			position: absolute;
+			bottom: 0;
+			right: 25%;
+			content: 'FSR';
+			font-size: 30px;
+			color: #ff0000;
+		}
+		#example1 {
+			max-width: 1200px;
+			aspect-ratio: 1200 / 735;
+		}
+		#example2 {
+			max-width: 1600px;
+			aspect-ratio: 1600 / 960;
+		}
+		#example3 {
+			max-width: 1600px;
+			aspect-ratio: 1600 / 960;
+		}
+		#example4 {
+			max-width: 1600px;
+			aspect-ratio: 1600 / 960;
+		}
 	</style>
 	<title>FidelityFX Super Resolution 1.0</title>
 	<script type="module" src="./main.ts" defer></script>
@@ -35,6 +81,53 @@
 			<source src="IMG_0086.MOV">
 		</video>
 		<canvas id="canvas"></canvas>
+	</div>
+	<div class="examples">
+		<h2>Compare streaming examples</h2>
+		<section>
+			<h3><a href="https://www.nicovideo.jp/watch/sm9" target="_blank" rel="noopener noreferrer">新・豪血寺一族 -煩悩解放 - レッツゴー！陰陽師</a></h3>
+			<div id="example1" class="ComparisonSlider example">
+				<div class="ComparisonSlider__Before">
+					<img src="sm9-original.png" alt="">
+				</div>
+				<div class="ComparisonSlider__After">
+					<img src="sm9-fsr.png" alt="">
+				</div>
+			</div>
+		</section>
+		<section>
+			<h3><a href="https://www.nicovideo.jp/watch/sm41892494" target="_blank" rel="noopener noreferrer">【MV再現】新・豪血寺一族‐レッツゴー！陰陽師【周央サンゴ】</a></h3>
+			<div id="example2" class="ComparisonSlider example">
+				<div class="ComparisonSlider__Before">
+					<img src="sm41892494-original.png" alt="">
+				</div>
+				<div class="ComparisonSlider__After">
+					<img src="sm41892494-fsr.png" alt="">
+				</div>
+			</div>
+		</section>
+		<section>
+			<h3><a href="https://www.nicovideo.jp/watch/so41178183" target="_blank" rel="noopener noreferrer">ぼっち・ざ・ろっく！ #1「転がるぼっち」</a></h3>
+			<div id="example3" class="ComparisonSlider example">
+				<div class="ComparisonSlider__Before">
+					<img src="so41178183-original.png" alt="">
+				</div>
+				<div class="ComparisonSlider__After">
+					<img src="so41178183-fsr.png" alt="">
+				</div>
+			</div>
+		</section>
+		<section>
+			<h3><a href="https://www.nicovideo.jp/watch/so39952539" target="_blank" rel="noopener noreferrer">[南極大冒険] 地球上で最も過酷！コウテイペンギンの子育て | Emperor penguin | BS4K8K | NHK</a></h3>
+			<div id="example4" class="ComparisonSlider example">
+				<div class="ComparisonSlider__Before">
+					<img src="so39952539-original.png" alt="">
+				</div>
+				<div class="ComparisonSlider__After">
+					<img src="so39952539-fsr.png" alt="">
+				</div>
+			</div>
+		</section>
 	</div>
 </body>
 </html>

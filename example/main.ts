@@ -150,4 +150,11 @@ window.addEventListener("load", () => {
     );
   });
   resizeObserver.observe(document.body);
+
+  // streaming examples
+  // initialize comparison slider
+  new ComparisonSlider("#example1");
+  new ComparisonSlider("#example2");
+  new ComparisonSlider("#example3");
+  new ComparisonSlider("#example4");
 }, { once: true });
