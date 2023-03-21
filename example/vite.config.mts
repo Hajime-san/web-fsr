@@ -26,4 +26,9 @@ export default defineConfig({
     open: true,
     port: 3000,
   },
+  build: {
+    outDir: path.resolve(...[__dirname, "dist"]),
+    emptyOutDir: true,
+    copyPublicDir: true,
+  },
 });
