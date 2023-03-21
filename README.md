@@ -14,6 +14,16 @@ So I wrote [static video](./example/) example and
 [browser extension](./browser-extension/) to test the result.\
 Here are some examples.
 
+- [https://hajime-san.github.io/web-fsr/](https://hajime-san.github.io/web-fsr/)
+
+## my guess
+
+From these examples, I think that `FSR 1.0` works well when the buffer resource
+to be denoised, no extreme small resolution and containing high spatial
+frequencies.\
+And it appears jagged a little bit on outline of Anime characters as in the
+picture.
+
 ## static video
 
 - original video
@@ -77,11 +87,3 @@ Here are some examples.
   `1546kb`
 - comparison
   ![so39952539-comparison.png](assets/so39952539-comparison.png?raw=true "so39952539-comparison")
-
-## my guess
-
-From these examples, I think that `FSR 1.0` works well when the buffer resource
-to be denoised, no extreme small resolution and containing high spatial
-frequencies.\
-And it appears jagged a little bit on outline of Anime characters as in the
-picture.
