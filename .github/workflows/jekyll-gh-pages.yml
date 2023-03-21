@@ -45,7 +45,7 @@ jobs:
       - name: Install dependencies
         run: pnpm install
       # build
-      - name: Build extension
+      - name: Build example page
         run: CD=true pnpm build
         working-directory: ./example
       - name: Upload artifact
