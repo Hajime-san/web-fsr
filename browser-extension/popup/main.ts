@@ -207,8 +207,6 @@ import rcasFragmentShader from "../../rcas.glsl?raw";
 
     // tick
     function animation() {
-      easuMaterial.uniforms["iChannel0"].value = videoTexture;
-      rcasMaterial.uniforms["iChannel0"].value = videoTexture;
       // render EASU stage
       renderer.setRenderTarget(renderTarget);
       renderer.render(easuScene, camera);
