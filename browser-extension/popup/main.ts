@@ -181,12 +181,15 @@ import rcasFragmentShader from "../../rcas.glsl?raw";
 
     // RCAS stage setting
     const rcasScene = new THREE.Scene();
-    const DEFAULT_SHARPNESS = 0.25;
+    const DEFAULT_SHARPNESS = 0.2;
     const rcasMaterial = new THREE.ShaderMaterial({
       uniforms: {
         iChannel0: {
           value: videoTexture,
         },
+        // I think that sampling source texture only seems to be better quality without sampleing EASU pass.🤔
+        // I can't make it out that is caused by ShaderToy porting or my misunderstanding.
+        // Set iChannel0.value to renderTarget.texture if you want to process correctly with the original algorithm.
         iChannel1: {
           value: renderTarget.texture,
         },

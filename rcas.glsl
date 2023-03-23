@@ -6,7 +6,7 @@
 uniform vec2 iResolution;
 uniform float sharpness;
 uniform sampler2D iChannel0;
-uniform sampler2D iChannel1;
+// uniform sampler2D iChannel1;
 out vec4 fragColor;
 
 /*
@@ -145,15 +145,15 @@ void main()
     vec3 col = FsrRcasF(fragCoord.xy, con);
 
     // Source image
-    vec2 uv1;
+    // vec2 uv1;
 
     // Bilinear interpolation
-    uv1 = fragCoord.xy/iResolution.xy;
+    // uv1 = fragCoord.xy/iResolution.xy;
 
     // Nearest pixel
-    //uv1 = (floor(vec2(textureSize(iChannel1,0))*fragCoord/iResolution.xy)+.5)/vec2(textureSize(iChannel1,0));
+    // uv1 = (floor(vec2(textureSize(iChannel1,0))*fragCoord.xy/iResolution.xy)+.5)/vec2(textureSize(iChannel1,0));
 
-    vec3 col_orig = texture(iChannel1,uv1).xyz;
+    // vec3 col_orig = texture(iChannel1,uv1).xyz;
 
     // Comparison tool
     // if (fragCoord.x/iResolution.x > division) col = col_orig;

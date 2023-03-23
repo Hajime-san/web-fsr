@@ -7,7 +7,7 @@ import easuFragmentShader from "../easu.glsl?raw";
 import rcasFragmentShader from "../rcas.glsl?raw";
 
 window.addEventListener("load", () => {
-  const DEFAULT_SHARPNESS = 0.25;
+  const DEFAULT_SHARPNESS = 0.2;
   // dom size variables
   let width = 0;
   let height = 0;
@@ -76,6 +76,9 @@ window.addEventListener("load", () => {
       iChannel0: {
         value: videoTexture,
       },
+      // I think that sampling source texture only seems to be better quality without sampleing EASU pass.🤔
+      // I can't make it out that is caused by ShaderToy porting or my misunderstanding.
+      // Set iChannel0.value to renderTarget.texture if you want to process correctly with the original algorithm.
       iChannel1: {
         value: renderTarget.texture,
       },
